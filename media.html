@@ -1,0 +1,64 @@
+<style>
+body {
+  background-color: #004444;
+  font-size: 30pt;
+  color: #00EEEE;
+}
+button {
+  font-size: 30pt;
+  margin: 2em;
+}
+</style>
+
+<div class="testcase">
+<h1>Web Audio test</h1>
+<button onclick="osc()">Start oscillator</button>
+<button onclick="stoposc()">Stop oscillator</button>
+</div>
+
+<div class="testcase">
+<h1>Audio test</h1>
+<audio src="t-rex-roar.mp3"></audio>
+<button onclick="start('audio')">Start audio</button>
+<button onclick="stop('audio')">Stop audio</button>
+</div>
+
+<div class="testcase">
+<h1>Video test</h1>
+<video></video>
+<p>
+<button onclick="addvid()">Add video</button>
+<button onclick="start('video')">Start video</button>
+<button onclick="stop('video')">Stop video</button>
+</p>
+</div>
+
+<script>
+function addvid() {
+  document.querySelector('video').src = "trailer_480p.mov";
+}
+function start(selector) {
+  document.querySelector(selector).play();
+}
+function stop(selector) {
+  document.querySelector(selector).pause();
+}
+
+var oscillator = null;
+function osc() {
+console.log("hi");
+// create web audio api context
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+// create Oscillator node
+oscillator = audioCtx.createOscillator();
+
+oscillator.type = 'square';
+oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // value in hertz
+oscillator.connect(audioCtx.destination);
+oscillator.start();
+}
+function stoposc() {
+  oscillator.stop()
+}
+</script>

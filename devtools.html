@@ -1,0 +1,70 @@
+<style>
+  body {
+    background-color: #004400;
+    color: #009900;
+    font-size: 30pt;
+  }
+  button {
+    font-size: 30pt;
+  }
+  a { color: #00FF00; }
+  .testcase {
+    background-color: #222222;
+    padding: 1em;
+    margin: 1em;
+  }
+</style>
+
+<script>
+console.log("this is a cached log message");
+console.warn("this is a cached warn");
+console.error("this is a cached error");
+
+function dolog() {
+  console.log("log message!");
+}
+function dowarn() {
+  console.warn("warn message!");
+}
+function doerr() {
+  console.error("error message!");
+}
+function doexception() {
+  new WebGLRenderingContext();
+}
+function dothrow() {
+  throw "oh no";
+}
+</script>
+
+<div class="testcase">
+  <h1>Cached console messages appear in app</h1>
+  <p>There should be 3 messages - a log, a warning, and an error.</p>
+</div>
+
+<div class="testcase">
+  <h1>Cached console messages appear in remote app</h1>
+  <p>There should be 3 messages - a log, a warning, and an error.</p>
+</div>
+
+<div class="testcase">
+  <h1>New messages appear in app</h1>
+  <button onclick="dolog()">Log</button>
+  <button onclick="dowarn()">Warn</button>
+  <button onclick="doerr()">Error</button>
+  <button onclick="doexception()">Uncaught exception</button>
+  <button onclick="dothrow()">Uncaugh throw</button>
+</div>
+
+<div class="testcase">
+  <h1>Navigate to new page with panel open</h1>
+  <p>Ensure the devtools panel is active. The next page should show live messages.</p>
+  <a href="devtools2.html">Navigate here</a>
+</div>
+
+<div class="testcase">
+  <h1>Navigate to new page with remote console open</h1>
+  <p>Ensure the console is active in a remote session. The next page should show live messages.</p>
+  <a href="devtools2.html">Navigate here</a>
+</div>
+
